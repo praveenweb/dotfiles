@@ -171,6 +171,9 @@ alias ing="get ing"
 alias configmaps="get configmaps"
 alias secrets="get secrets"
 
+#fancy alias
+alias weather="curl http://wttr.in/Bangalore"
+
 export KUBECTL_CONTEXT=$(kubectl config current-context)
 export KUBECTL_NAMESPACE=${DEFAULT_NAMESPACE-default}
 
