@@ -194,9 +194,45 @@ export LANG=en_US.UTF-8
 export HH_CONFIG=hicolor         # get more colors
 shopt -s histappend              # append new history items to .bash_history
 export HISTCONTROL=ignorespace   # leading space hides commands from history
-export HISTFILESIZE=10000        # increase history file size (default is 500)
+export HISTFILESIZE=100000        # increase history file size (default is 500)
 export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
 # if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
 if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
+
+# Avoid duplicate entries
+HISTCONTROL="erasedups:ignoreboth"
+
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+
+# Treat hyphens and underscores as equivalent
+bind "set completion-map-case on"
+
+# Display matches for ambiguous patterns at first tab press
+bind "set show-all-if-ambiguous on"
+
+# Enable history expansion with space
+# E.g. typing !!<space> will replace the !! with your last command
+bind Space:magic-space
+
+# Bash v4 features
+
+# Automatically trim long paths in the prompt (requires Bash 4.x)
+PROMPT_DIRTRIM=2
+
+## BETTER DIRECTORY NAVIGATION ##
+
+# Prepend cd to directory names automatically
+shopt -s autocd 2> /dev/null
+# Correct spelling errors during tab-completion
+shopt -s dirspell 2> /dev/null
+# Correct spelling errors in arguments supplied to cd
+shopt -s cdspell 2> /dev/null
+
+# This defines where cd looks for targets
+# Add the directories you want to have fast access to, separated by colon
+# Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
+CDPATH="."
+
 
