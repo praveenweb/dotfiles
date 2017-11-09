@@ -2,7 +2,7 @@
 [[ -s "$HOME/.ruby-conf.sh" ]] && source "$HOME/.ruby-conf.sh"
 [[ -s "$HOME/.tmux-conf.sh" ]] && source "$HOME/.tmux-conf.sh"
 
-export PATH=/Users/Praveen/.npm-packages/lib/node_modules/:$PATH
+export PATH="$HOME/.npm-packages/lib/node_modules/:$PATH"
 
 export PATH="$HOME/.npm-packages/bin:$PATH"
 export PATH="$HOME/user/local/bin:$PATH"
@@ -238,4 +238,6 @@ shopt -s cdspell 2> /dev/null
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
 CDPATH="."
 
-
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

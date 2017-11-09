@@ -22,6 +22,7 @@ brew install wget
 brew install ffind
 brew install wifi-password
 brew install hub
+brew install htop
 
 # MacVim for terminal
 brew install macvim
