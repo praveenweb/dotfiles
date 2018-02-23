@@ -1,12 +1,14 @@
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
-[[ -s "$HOME/.ruby-conf.sh" ]] && source "$HOME/.ruby-conf.sh"
+#[[ -s "$HOME/.ruby-conf.sh" ]] && source "$HOME/.ruby-conf.sh"
 [[ -s "$HOME/.tmux-conf.sh" ]] && source "$HOME/.tmux-conf.sh"
 
-export PATH="$HOME/.npm-packages/lib/node_modules/:$PATH"
-
+export PATH="$HOME/.npm-packages/lib/node_modules:$PATH"
 export PATH="$HOME/.npm-packages/bin:$PATH"
-export PATH="$HOME/user/local/bin:$PATH"
+#export PATH="$HOME/usr/local/bin:$PATH"
 export PATH="$HOME/.node/bin:$PATH"
+
+export NVM_DIR=~/.nvm
+. $(brew --prefix nvm)/nvm.sh
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f /Users/Praveen/Work/google-cloud-sdk/path.bash.inc ]; then
@@ -24,10 +26,10 @@ source <(kubectl completion bash)
 #if [ -f /usr/local/share/bash-completion/bash_completion ]; then
 #. /usr/local/share/bash-completion/bash_completion
 #fi
-export PATH="/usr/local/opt/node@6/bin:$PATH"
+#export PATH="/usr/local/opt/node@6/bin:$PATH"
 
 ## Git commands
-alias log='git log'
+alias gphm='git add . && git commit -m "updates" && git push hasura master'
 alias gco='git checkout'
 alias wut='git log master...${branch} --oneline'
 alias diff='git diff'
@@ -72,7 +74,6 @@ mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and ju
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
 ql () { qlmanage -p "$*" >& /dev/null; }    # ql:           Opens any file in MacOS Quicklook Preview
 alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS Desktop
-
 
 #   extract:  Extract most know archives with one command
 #   ---------------------------------------------------------
@@ -178,7 +179,6 @@ export KUBECTL_CONTEXT=$(kubectl config current-context)
 export KUBECTL_NAMESPACE=${DEFAULT_NAMESPACE-default}
 
 # ----------------------------git branch in shell
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -191,7 +191,6 @@ export PS1="🙄\[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[33m\] $KUBE
 # powerline font compatibility
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-#set -o vi
 
 # for history complete
 export HH_CONFIG=hicolor         # get more colors
@@ -233,6 +232,8 @@ shopt -s dirspell 2> /dev/null
 # Correct spelling errors in arguments supplied to cd
 shopt -s cdspell 2> /dev/null
 
+#set -o vi
+
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
@@ -241,3 +242,5 @@ CDPATH="."
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
